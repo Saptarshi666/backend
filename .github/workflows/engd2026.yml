@@ -68,6 +68,53 @@ jobs:
           fi
           pip install pyroomacoustics
           pip install pytest pytest-cov || echo "Skipping pytest install if pip fails"
+      - name: Create mock methods-config.json for CI
+        run: |
+          mkdir -p /app/simulation-backend
+          cat > /app/simulation-backend/methods-config.json << 'EOF'
+          [
+            {
+              "simulationType": "DG",
+              "containerImage": "dg_image:latest",
+              "envVars": {"CUDA_VISIBLE_DEVICES": "0"},
+              "label": "Discontinuous Galerkin method",
+              "settings": "dg_setting.json",
+              "entryFile": "DGinterface.py",
+              "repositoryURL": "https://github.com/Building-acoustics-TU-Eindhoven/edg-acoustics/",
+              "documentationURL": "https://dg-roomacoustics.readthedocs.io/en/latest/"
+            },
+            {
+              "simulationType": "DE",
+              "containerImage": "de_image:latest",
+              "envVars": {},
+              "label": "Diffusion Equation method",
+              "settings": "de_setting.json",
+              "entryFile": "DEinterface.py",
+              "repositoryURL": "https://github.com/Building-acoustics-TU-Eindhoven/acousticDE/",
+              "documentationURL": "https://building-acoustics-tu-eindhoven.github.io/acousticDE/index.html"
+            },
+            {
+              "simulationType": "MyNewMethod",
+              "containerImage": "mynew_image:latest",
+              "envVars": {},
+              "label": "My New Method",
+              "entryFile": "MyNewMethodInterface.py",
+              "settings": "my_new_setting.json",
+              "repositoryURL": "",
+              "documentationURL": ""
+            },
+            {
+              "simulationType": "PA",
+              "containerImage": "pa_image:latest",
+              "envVars": {},
+              "label": "Pyromacoustics Method",
+              "entryFile": "pyroomacoustics_interface.py",
+              "settings": "examples.json",
+              "repositoryURL": "",
+              "documentationURL": ""
+            }
+          ]
+          EOF
 
       - name: Run tests
         env:
