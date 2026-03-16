@@ -70,8 +70,8 @@ jobs:
           pip install pytest pytest-cov || echo "Skipping pytest install if pip fails"
       - name: Create mock methods-config.json for CI
         run: |
-          mkdir -p /app/simulation-backend
-          cat > /app/simulation-backend/methods-config.json << 'EOF'
+          mkdir -p /simulation-backend
+          cat > /simulation-backend/methods-config.json << 'EOF'
           [
             {
               "simulationType": "DG",
