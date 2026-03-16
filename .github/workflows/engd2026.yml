@@ -68,7 +68,7 @@ jobs:
           fi
           pip install pyroomacoustics
           pip install pytest pytest-cov || echo "Skipping pytest install if pip fails"
-      - name: Create mock methods-config.json for CI
+      - name: Create mock methods-config.json and settings for CI
         run: |
           mkdir -p ${{ github.workspace }}/simulation-backend
           cat > ${{ github.workspace }}/simulation-backend/methods-config.json << 'EOF'
@@ -115,6 +115,11 @@ jobs:
             }
           ]
           EOF
+          # Create empty mock settings files
+          touch ${{ github.workspace }}/simulation-backend/example_settings/dg_setting.json
+          touch ${{ github.workspace }}/simulation-backend/example_settings/de_setting.json
+          touch ${{ github.workspace }}/simulation-backend/example_settings/my_new_setting.json
+          touch ${{ github.workspace }}/simulation-backend/example_settings/examples.json
 
       - name: Run tests
         env:
