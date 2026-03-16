@@ -71,6 +71,7 @@ jobs:
       - name: Create mock methods-config.json and settings for CI
         run: |
           mkdir -p ${{ github.workspace }}/simulation-backend
+          mkdir -p ${{ github.workspace }}/simulation-backend/example_settings
           cat > ${{ github.workspace }}/simulation-backend/methods-config.json << 'EOF'
           [
             {
