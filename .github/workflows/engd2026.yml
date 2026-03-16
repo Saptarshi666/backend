@@ -128,6 +128,7 @@ jobs:
           APP_TEST_SETTINGS_MODULE: config.TestingConfigs
           TESTING: "true"
           METHODS_CONFIG_PATH: ${{ github.workspace }}/simulation-backend/methods-config.json
+          SETTINGS_FILE_FOLDER: ${{ github.workspace }}/simulation-backend/example_settings
         run: |
             pytest tests/integration tests/unit/services/test_discovery_service.py tests/unit/services/test_run_solver.py || echo "Tests failed, but workflow continues"
 
